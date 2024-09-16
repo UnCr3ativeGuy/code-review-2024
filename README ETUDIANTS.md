@@ -1,5 +1,6 @@
 pour chaque participants:
 
-NOM prenom 
+GHOBRINI sofian
+BELLOC adrien 
 
 ...
