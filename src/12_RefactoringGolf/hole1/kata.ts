@@ -6,23 +6,20 @@ export class Game {
   private _toto: Board = new Board();
 
   public Play(symbol: string, x: number, y: number): void {
-    //if first move
+    //Check if move is valid
     if (this._lastSymbol == ' ') {
-      //if player is X
       if (symbol == 'O') {
         throw new Error('Invalid first player');
       }
     }
-    //if not first move but player repeated
     else if (symbol == this._lastSymbol) {
       throw new Error('Invalid next player');
     }
-    //if not first move but play on an already played tile
     else if (this._toto.TileAt(x, y).Symbol != ' ') {
       throw new Error('Invalid position');
     }
 
-    // update game state
+    //Update board
     this._lastSymbol = symbol;
     this._toto.AddTileAt(symbol, x, y);
   }
