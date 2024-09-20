@@ -24,36 +24,52 @@ export class Game {
   }
 
   public Winner(): string {
-    if(this.checkLineFull(0)) {
-      if(this.checkWinner(0)) {
-        return this._toto.TileAt(0, 0)!.Symbol
-      }
+    if(this.checkFirstLineFull() && this.checkFirstLineWinner()) {
+      return this._toto.TileAt(0, 0)!.Symbol
     }
 
-    if(this.checkLineFull(1)) {
-      if(this.checkWinner(1)) {
-        return this._toto.TileAt(1, 0)!.Symbol
-      }
+    if(this.checkSecondLineFull() && this.checkSecondLineWinner()) {
+      return this._toto.TileAt(1, 0)!.Symbol
     }
 
-    if(this.checkLineFull(2)) {
-      if(this.checkWinner(2)) {
-        return this._toto.TileAt(2, 0)!.Symbol
-      }
+    if(this.checkThirdLineFull() && this.checkThirdLineWinner()) {
+      return this._toto.TileAt(2, 0)!.Symbol
     }
 
     return ' '
   }
 
-  private checkLineFull(line: number): boolean {
-    return this._toto.TileAt(line, 0)!.Symbol != ' ' &&
-        this._toto.TileAt(line, 1)!.Symbol != ' ' &&
-        this._toto.TileAt(line, 2)!.Symbol != ' '
+  private checkFirstLineFull(): boolean {
+    return this._toto.TileAt(0, 0)!.Symbol != ' ' &&
+        this._toto.TileAt(0, 1)!.Symbol != ' ' &&
+        this._toto.TileAt(0, 2)!.Symbol != ' '
   }
 
-  private checkWinner(line: number): boolean {
-    return this._toto.TileAt(line, 0)!.Symbol == this._toto.TileAt(line, 1)!.Symbol &&
-        this._toto.TileAt(line, 2)!.Symbol == this._toto.TileAt(line, 1)!.Symbol
+  private checkSecondLineFull(): boolean {
+    return this._toto.TileAt(1, 0)!.Symbol != ' ' &&
+        this._toto.TileAt(1, 1)!.Symbol != ' ' &&
+        this._toto.TileAt(1, 2)!.Symbol != ' '
+  }
+
+  private checkThirdLineFull(): boolean {
+    return this._toto.TileAt(2, 0)!.Symbol != ' ' &&
+        this._toto.TileAt(2, 1)!.Symbol != ' ' &&
+        this._toto.TileAt(2, 2)!.Symbol != ' '
+  }
+
+  private checkFirstLineWinner(): boolean {
+    return this._toto.TileAt(0, 0)!.Symbol == this._toto.TileAt(0, 1)!.Symbol &&
+        this._toto.TileAt(0, 2)!.Symbol == this._toto.TileAt(0, 1)!.Symbol
+  }
+
+  private checkSecondLineWinner(): boolean {
+    return this._toto.TileAt(1, 0)!.Symbol == this._toto.TileAt(1, 1)!.Symbol &&
+        this._toto.TileAt(1, 2)!.Symbol == this._toto.TileAt(1, 1)!.Symbol
+  }
+
+  private checkThirdLineWinner(): boolean {
+    return this._toto.TileAt(2, 0)!.Symbol == this._toto.TileAt(2, 1)!.Symbol &&
+        this._toto.TileAt(2, 2)!.Symbol == this._toto.TileAt(2, 1)!.Symbol
   }
 }
 
