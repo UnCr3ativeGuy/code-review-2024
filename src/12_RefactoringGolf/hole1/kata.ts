@@ -5,7 +5,6 @@ export class Game {
   private _toto: Board = new Board();
 
   public Play(symbol: string, x: number, y: number): void {
-    //Check if move is valid
     if (this._lastSymbol == ' ') {
       if (symbol == 'O') {
         throw new Error('Invalid first player');
@@ -18,7 +17,6 @@ export class Game {
       throw new Error('Invalid position');
     }
 
-    //Update board
     this._lastSymbol = symbol;
     this._toto.AddTileAt(symbol, x, y);
   }
