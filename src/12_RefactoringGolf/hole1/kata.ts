@@ -1,6 +1,5 @@
 /* eslint-disable */
 
-// améliore ce code
 export class Game {
   private _lastSymbol = ' ';
   private _toto: Board = new Board();
@@ -46,15 +45,15 @@ export class Game {
     return ' '
   }
 
-  private checkLineFull(ligne: number): boolean {
-    return this._toto.TileAt(ligne, 0)!.Symbol != ' ' &&
-        this._toto.TileAt(ligne, 1)!.Symbol != ' ' &&
-        this._toto.TileAt(ligne, 2)!.Symbol != ' '
+  private checkLineFull(line: number): boolean {
+    return this._toto.TileAt(line, 0)!.Symbol != ' ' &&
+        this._toto.TileAt(line, 1)!.Symbol != ' ' &&
+        this._toto.TileAt(line, 2)!.Symbol != ' '
   }
 
-  private checkWinner(ligne: number): boolean {
-    return this._toto.TileAt(ligne, 0)!.Symbol == this._toto.TileAt(ligne, 1)!.Symbol &&
-        this._toto.TileAt(ligne, 2)!.Symbol == this._toto.TileAt(ligne, 1)!.Symbol
+  private checkWinner(line: number): boolean {
+    return this._toto.TileAt(line, 0)!.Symbol == this._toto.TileAt(line, 1)!.Symbol &&
+        this._toto.TileAt(line, 2)!.Symbol == this._toto.TileAt(line, 1)!.Symbol
   }
 }
 
