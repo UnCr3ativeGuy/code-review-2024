@@ -28,52 +28,36 @@ export class Game {
   }
 
   public Winner(): string {
-    //if the positions in first row are taken
-    if (
-      this._toto.TileAt(0, 0)!.Symbol != ' ' &&
-      this._toto.TileAt(0, 1)!.Symbol != ' ' &&
-      this._toto.TileAt(0, 2)!.Symbol != ' '
-    ) {
-      //if first row is full with same symbol
-      if (
-        this._toto.TileAt(0, 0)!.Symbol == this._toto.TileAt(0, 1)!.Symbol &&
-        this._toto.TileAt(0, 2)!.Symbol == this._toto.TileAt(0, 1)!.Symbol
-      ) {
-        return this._toto.TileAt(0, 0)!.Symbol;
+    if(this.checkLineFull(0)) {
+      if(this.checkWinner(0)) {
+        return this._toto.TileAt(0, 0)!.Symbol
       }
     }
 
-    //if the positions in first row are taken
-    if (
-      this._toto.TileAt(1, 0)!.Symbol != ' ' &&
-      this._toto.TileAt(1, 1)!.Symbol != ' ' &&
-      this._toto.TileAt(1, 2)!.Symbol != ' '
-    ) {
-      //if middle row is full with same symbol
-      if (
-        this._toto.TileAt(1, 0)!.Symbol == this._toto.TileAt(1, 1)!.Symbol &&
-        this._toto.TileAt(1, 2)!.Symbol == this._toto.TileAt(1, 1)!.Symbol
-      ) {
-        return this._toto.TileAt(1, 0)!.Symbol;
+    if(this.checkLineFull(1)) {
+      if(this.checkWinner(1)) {
+        return this._toto.TileAt(1, 0)!.Symbol
       }
     }
 
-    //if the positions in first row are taken
-    if (
-      this._toto.TileAt(2, 0)!.Symbol != ' ' &&
-      this._toto.TileAt(2, 1)!.Symbol != ' ' &&
-      this._toto.TileAt(2, 2)!.Symbol != ' '
-    ) {
-      //if middle row is full with same symbol
-      if (
-        this._toto.TileAt(2, 0)!.Symbol == this._toto.TileAt(2, 1)!.Symbol &&
-        this._toto.TileAt(2, 2)!.Symbol == this._toto.TileAt(2, 1)!.Symbol
-      ) {
-        return this._toto.TileAt(2, 0)!.Symbol;
+    if(this.checkLineFull(2)) {
+      if(this.checkWinner(2)) {
+        return this._toto.TileAt(2, 0)!.Symbol
       }
     }
 
-    return ' ';
+    return ' '
+  }
+
+  private checkLineFull(ligne: number): boolean {
+    return this._toto.TileAt(ligne, 0)!.Symbol != ' ' &&
+        this._toto.TileAt(ligne, 1)!.Symbol != ' ' &&
+        this._toto.TileAt(ligne, 2)!.Symbol != ' '
+  }
+
+  private checkWinner(ligne: number): boolean {
+    return this._toto.TileAt(ligne, 0)!.Symbol == this._toto.TileAt(ligne, 1)!.Symbol &&
+        this._toto.TileAt(ligne, 2)!.Symbol == this._toto.TileAt(ligne, 1)!.Symbol
   }
 }
 
