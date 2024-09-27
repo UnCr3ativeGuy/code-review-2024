@@ -36,7 +36,7 @@ export class Game {
   }
 
   private validatePositionIsEmpty(x: number, y: number) {
-    if (this._board.TileAt(x, y).Symbol != emptyPlay) {
+    if (this._board.isTileEmpty(x,y)) {
       throw new Error('Invalid position');
     }
   }
@@ -51,15 +51,15 @@ export class Game {
 
   public Winner(): string {
     if (this.isRowFull(firstRow) && this.isRowFullWithSameSymbol(firstRow)) {
-      return this._board.TileAt(firstRow, firstColumn)!.Symbol;
+      return this._board.getTileSymbol(firstRow, firstColumn);
     }
 
     if (this.isRowFull(secondRow) && this.isRowFullWithSameSymbol(secondRow)) {
-      return this._board.TileAt(secondRow, firstColumn)!.Symbol;
+      return this._board.getTileSymbol(secondRow, firstColumn);
     }
 
     if (this.isRowFull(thirdRow) && this.isRowFullWithSameSymbol(thirdRow)) {
-      return this._board.TileAt(thirdRow, firstColumn)!.Symbol;
+      return this._board.getTileSymbol(thirdRow, firstColumn);
     }
 
     return emptyPlay;
@@ -67,18 +67,18 @@ export class Game {
 
   private isRowFull(row: number) {
     return (
-        this._board.TileAt(row, firstColumn)!.Symbol != emptyPlay &&
-        this._board.TileAt(row, secondColumn)!.Symbol != emptyPlay &&
-        this._board.TileAt(row, thirdColumn)!.Symbol != emptyPlay
+        this._board.isTileEmpty(row,firstColumn) &&
+        this._board.isTileEmpty(row,secondColumn) &&
+        this._board.isTileEmpty(row,thirdColumn)
     );
   }
 
   private isRowFullWithSameSymbol(row: number) {
     return (
-        this._board.TileAt(row, firstColumn)!.Symbol ==
-        this._board.TileAt(row, secondColumn)!.Symbol &&
-        this._board.TileAt(row, thirdColumn)!.Symbol ==
-        this._board.TileAt(row, secondColumn)!.Symbol
+        this._board.getTileSymbol(row, firstColumn) ==
+        this._board.getTileSymbol(row, secondColumn) &&
+        this._board.getTileSymbol(row, thirdColumn) ==
+        this._board.getTileSymbol(row, secondColumn)
     );
   }
 }
@@ -99,6 +99,14 @@ class Board {
         this._plays.push(tile);
       }
     }
+  }
+
+  public getTileSymbol(x: number, y: number): string {
+    return this.TileAt(x, y)!.Symbol
+  }
+
+  public isTileEmpty(x: number, y: number): boolean {
+    return this.getTileSymbol(x,y) != emptyPlay
   }
 
   public TileAt(x: number, y: number): Tile {
